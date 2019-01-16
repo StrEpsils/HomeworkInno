@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 /**
  * Класс для сортировки массивов
+ *
  * @author SCherkasov
  */
 public class ArraySorts {
@@ -18,6 +19,7 @@ public class ArraySorts {
 
     /**
      * Bubble Sort
+     *
      * @param array массив
      */
     private static void BubbleSort(Integer[] array) {
@@ -38,13 +40,14 @@ public class ArraySorts {
 
     /**
      * Insert Sort
+     *
      * @param arr массив
      */
-    private static void InsertSort(Integer[] arr){
+    private static void InsertSort(Integer[] arr) {
         int mMin;
-        for (int i = 0; i < arr.length-1; i++) {
+        for (int i = 0; i < arr.length - 1; i++) {
             mMin = i;
-            for (int j = i+1; j < arr.length; j++) {
+            for (int j = i + 1; j < arr.length; j++) {
                 if (arr[j] < arr[mMin]) mMin = j;
             }
             int mTemp = arr[mMin];
