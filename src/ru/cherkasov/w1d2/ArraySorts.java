@@ -1,7 +1,5 @@
 package ru.cherkasov.w1d2;
 
-import java.util.logging.Logger;
-
 /**
  * Сортировка массивов методами:
  * 1) Пузырька
@@ -11,7 +9,6 @@ import java.util.logging.Logger;
  * @author SCherkasov
  */
 public abstract class ArraySorts {
-//    static Logger log = Logger.getLogger(ArraySorts.class.getName());
 
     /**
      * Сортировка пузырьком
