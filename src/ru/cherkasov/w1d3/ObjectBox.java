@@ -9,6 +9,8 @@ import java.util.*;
  */
 public class ObjectBox {
 
+    private UUID uuid = UUID.randomUUID();
+
     private Collection<Object> storage;
 
     private Collection<Object> getStorage() {
@@ -71,18 +73,20 @@ public class ObjectBox {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ObjectBox objectBox = (ObjectBox) o;
-        return Objects.equals(this.getStorage(), objectBox.storage);
+        return Objects.equals(uuid, objectBox.uuid) &&
+                Objects.equals(storage, objectBox.storage);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(this.storage);
+        return Objects.hash(uuid, storage);
     }
 
     @Override
     public String toString() {
         return "ObjectBox{" +
-                "storage=" + storage +
+                "uuid=" + uuid +
+                ", storage=" + storage +
                 '}';
     }
 }
