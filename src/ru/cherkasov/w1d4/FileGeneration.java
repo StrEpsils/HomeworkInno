@@ -19,7 +19,7 @@ public class FileGeneration {
     void getFiles(String path, int n, int size, String[] words, int probability) {
 
         for (int i = 0; i < n; i++) {
-            try (OutputStream outputStream = new FileOutputStream("./" + path + "/" + "extract_" + i + ".txt", true)) {
+            try (OutputStream outputStream = new FileOutputStream("./" + path + "/" + "extract_" + i + ".txt", false)) {
                 for (int j = 0; j < size; j++) {
                     GenerationHelper generationHelper = new GenerationHelper();
                     byte[] buffer = generationHelper.genParagraph(words, probability).getBytes();

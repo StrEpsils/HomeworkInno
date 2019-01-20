@@ -36,9 +36,9 @@ public class GenerationHelper {
         int wordCounter = 0;
         String[] wordsDelimiter = new String[]{" ", ", "};
         String[] masPunct = {". ", "! ", "? "};
-        while (true) {
+        for (String word : collectionWord) {
             if (Math.random() < 1.0 / p) {
-                stringBuilder.append(collectionWord[new Random().nextInt(100)]);
+                stringBuilder.append(word);
                 wordCounter++;
             } else continue;
             if (wordCounter == lengthOffer) {
@@ -52,7 +52,7 @@ public class GenerationHelper {
         if (stringBuilder.length() > 2) {
             return stringBuilder.substring(0, 1).toUpperCase() + stringBuilder.substring(1).toLowerCase();
         }
-        return stringBuilder.toString();
+        return stringBuilder.substring(0, 1).toUpperCase();
     }
 
     /**
