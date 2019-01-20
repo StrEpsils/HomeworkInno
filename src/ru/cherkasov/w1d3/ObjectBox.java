@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class ObjectBox {
 
-    private UUID uuid = UUID.randomUUID();
+    protected UUID uuid = UUID.randomUUID();
 
     private Collection<Object> storage;
 
