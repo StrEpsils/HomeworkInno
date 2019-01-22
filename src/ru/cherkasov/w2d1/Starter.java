@@ -4,10 +4,10 @@ public class Starter {
 
     public static void main(String[] args) {
         EntityObject entityObject = new EntityObject("Egor", 22, "Developer");
-        CustomSerial cs = new CustomSerial();
+        CustomSerialImpl cs = new CustomSerialImpl();
         cs.serialObj(entityObject, "test");
 
-        CustomDeSerial customDeSerial = new CustomDeSerial("./test/EntityObject.xml");
+        CustomDeSerialImpl customDeSerial = new CustomDeSerialImpl("./test/EntityObject.xml");
         EntityObject entityObject1 = (EntityObject) customDeSerial.writeObject(entityObject);
         System.out.println(entityObject1.toString());
     }
