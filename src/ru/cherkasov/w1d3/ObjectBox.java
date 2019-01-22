@@ -86,7 +86,7 @@ public class ObjectBox {
     public String toString() {
         return "ObjectBox{" +
                 "uuid=" + uuid +
-                ", storage=" + storage +
+                ", ResultStorage=" + storage +
                 '}';
     }
 }
