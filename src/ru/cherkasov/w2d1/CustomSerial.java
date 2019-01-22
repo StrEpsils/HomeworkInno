@@ -43,7 +43,10 @@ public class CustomSerial {
             if (field.getType().isPrimitive() || isWrapperType(field.getType().getSimpleName())) {
                 field.setAccessible(true);
                 try {
-                    bf.append("\t<").append(field.getName()).append(">").append(field.get(obj)).append("</")
+                    bf.append("\t<")
+                            .append(field.getName()).append(" ").append("type=\"")
+                            .append(field.getType().getSimpleName()).append("\">")
+                            .append(field.get(obj)).append("</")
                             .append(field.getName()).append(">\n");
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
