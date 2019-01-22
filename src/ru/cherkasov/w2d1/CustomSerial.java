@@ -37,17 +37,17 @@ public class CustomSerial {
     public void serialObj(Object obj, String path) {
         if (obj == null) return;
         StringBuilder bf = new StringBuilder();
-        bf.append("<").append(obj.getClass().getSimpleName()).append("> \n");
+        bf.append("<").append(obj.getClass().getSimpleName()).append(">");
         Field[] fields = obj.getClass().getDeclaredFields();
         for (Field field : fields) {
             if (field.getType().isPrimitive() || isWrapperType(field.getType().getSimpleName())) {
                 field.setAccessible(true);
                 try {
-                    bf.append("\t<")
+                    bf.append("<")
                             .append(field.getName()).append(" ").append("type=\"")
                             .append(field.getType().getSimpleName()).append("\">")
                             .append(field.get(obj)).append("</")
-                            .append(field.getName()).append(">\n");
+                            .append(field.getName()).append(">");
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
