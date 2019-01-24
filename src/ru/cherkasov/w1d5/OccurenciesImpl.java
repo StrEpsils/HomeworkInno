@@ -9,6 +9,12 @@ public class OccurenciesImpl implements Occurencies {
     private ExecutorService poolThread = Executors.newFixedThreadPool(MAX_THREADS);
     private BlockingQueue<String> outCollection = new LinkedBlockingQueue<>();
 
+    /**
+     * Получаем предложения
+     * @param sources входящий массив ресурсов
+     * @param words список слов
+     * @param res исходящий файл
+     */
     @Override
     public void getOccurencies(String[] sources, String[] words, String res) {
         long l = System.currentTimeMillis();
@@ -16,9 +22,7 @@ public class OccurenciesImpl implements Occurencies {
         OutFiles resultFileWriter = new OutFiles(res, outCollection);
         resultFileWriter.start();
 
-        for (String source : sources) {
-            poolThread.submit(new Parser(source, new HashSet<>(Arrays.asList(words)), outCollection));
-        }
+        Arrays.stream(sources).forEach(source -> poolThread.submit(new Parser(source, new HashSet<>(Arrays.asList(words)), outCollection)));
         poolThread.shutdown();
         try {
             poolThread.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);

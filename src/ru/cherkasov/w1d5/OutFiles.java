@@ -8,11 +8,19 @@ public class OutFiles extends Thread {
     private String outFile;
     private BlockingQueue<String> outCollection;
 
+    /**
+     * Конструктор класса выходного файла
+     * @param outFile путь к файлу
+     * @param outCollection блокирующая очередь с данными
+     */
     public OutFiles(String outFile, BlockingQueue<String> outCollection) {
         this.outFile = outFile;
         this.outCollection = outCollection;
     }
 
+    /**
+     * Запуск потока для записи в файл
+     */
     @Override
     public void run() {
         int count = 0;
