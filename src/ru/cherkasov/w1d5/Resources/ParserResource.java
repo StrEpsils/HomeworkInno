@@ -45,7 +45,7 @@ public class ParserResource extends Thread {
                     if (!found) continue;
                     SaveFile file = new SaveFile(path, s.trim());
                     file.saveFromFile();
-                    System.out.println(s.trim());
+                    System.out.println("findWord " + currentThread().getName());
                 }
             }
             sb.setLength(0);
