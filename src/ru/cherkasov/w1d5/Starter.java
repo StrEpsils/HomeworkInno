@@ -4,11 +4,13 @@ import java.io.IOException;
 
 public class Starter {
 
+
     public static void main(String[] args) throws IOException {
-        String[] sources = new String[]{"./test/warpeace.txt", "./test/warpeace.txt", "./test/warpeace.txt"};
-        String[] words = new String[]{"Petersburg"};
-        String res = "./test/outFile.txt";
-        OccurenciesImpl occurencies = new OccurenciesImpl();
-        occurencies.getOccurencies(sources, words, res);
+        String[] words = {"like", "place"};
+        String[] resources = {"http://www.gutenberg.org/cache/epub/17168/pg17168.txt", "./test/extract_0.txt"};
+        Occurencies occurencies = new OccurenciesImpl();
+        occurencies.getOccurencies(resources, words, "./test/test.txt");
+
     }
+
 }
