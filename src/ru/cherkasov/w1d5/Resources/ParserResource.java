@@ -36,10 +36,7 @@ public class ParserResource extends Thread {
         Sources sources = new SourcesImpl();
         StringBuilder sb = new StringBuilder();
         try(BufferedReader bf = sources.openSourceStream(res)) {
-            String line;
-            while ((line = bf.readLine()) != null) {
-                sb.append(line).append(" ");
-            }
+            bf.lines().forEach(line -> sb.append(line).append(" "));
             String[] listSentence = sb.toString().split("[.]");
             for (String s : listSentence) {
                 for (String word : words) {
