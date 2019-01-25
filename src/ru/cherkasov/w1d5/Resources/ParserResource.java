@@ -9,22 +9,33 @@ import java.util.Arrays;
  */
 public class ParserResource extends Thread {
 
-    private String source; //стрим откуда берем
-    private volatile String path; //путь
-    private String[] words; //список слов
+    private String res;
+    private volatile String path;
+    private String[] words;
 
+    /**
+     * @param res ресурс
+     * @param path путь к файлу
+     * @param words массив слов
+     */
     public ParserResource(String res, String path, String[] words) {
         this.path = path;
-        this.source = res;
+        this.res = res;
         this.words = words;
     }
 
 
+    /**
+     * Запускаем поток на обработку входных данных
+     * Разделяем входящий текст на массив предложений,
+     * с последующим разделением на слова.
+     * Сохраняем в файл.
+     */
     public void run() {
         System.out.println(currentThread().getName());
         Sources sources = new SourcesImpl();
         StringBuilder sb = new StringBuilder();
-        try(BufferedReader bf = sources.openSourceStream(source)) {
+        try(BufferedReader bf = sources.openSourceStream(res)) {
             String line;
             while ((line = bf.readLine()) != null) {
                 sb.append(line).append(" ");
@@ -35,7 +46,6 @@ public class ParserResource extends Thread {
                     boolean found = Arrays.asList(s.replaceAll("/W", " ")
                             .split(" ")).contains(word);
                     if (!found) continue;
-                    //TODO реализовать запись в файл
                     SaveFile file = new SaveFile(path, s.trim());
                     file.saveFromFile();
                     System.out.println(s.trim());
