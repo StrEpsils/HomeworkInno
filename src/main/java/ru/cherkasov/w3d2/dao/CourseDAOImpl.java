@@ -1,5 +1,7 @@
 package ru.cherkasov.w3d2.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.cherkasov.w3d2.entity.Person;
 import ru.cherkasov.w3d2.entity.Subject;
 
@@ -12,6 +14,8 @@ import java.util.Collection;
 import java.util.List;
 
 public class CourseDAOImpl implements CourseDAO {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CourseDAOImpl.class);
 
     private static final String GET_PERSON_BY_SUBJECT = "SELECT DISTINCT course.person_id, name,birthdate FROM course LEFT JOIN person ON course.person_id = person.person_id WHERE subject_id = ?";
     private static final String GET_SUBJECT_BY_PERSON = "SELECT DISTINCT s.subject_id,description FROM course LEFT JOIN subject s on course.subject_id = s.subject_id WHERE person_id = ?";

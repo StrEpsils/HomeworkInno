@@ -1,5 +1,7 @@
 package ru.cherkasov.w3d2.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.cherkasov.w3d2.entity.Person;
 
 import java.sql.*;
@@ -10,7 +12,10 @@ import java.util.List;
 /**
  * Реализация интерфейса студент
  */
-public class PersonDAOImpl implements PersonDAO {
+
+public class PersonDAOImpl implements ru.cherkasov.w3d2.dao.PersonDAO {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(PersonDAOImpl.class);
 
     private static final String SELECT_FROM_PERSON = "select * from person";
     private static final String UPDATE_PERSON_SET_NAME_BIRTHDATE_WHERE_PERSON_ID = "update person set name = ?, birthdate = ? where person_id = ?";
@@ -29,7 +34,8 @@ public class PersonDAOImpl implements PersonDAO {
      * @throws SQLException ошибка выполнения запроса
      */
     @Override
-    public Collection<Person> getAllPersons() throws SQLException {
+    public Collection<Person> getAllPersons(){
+        LOGGER.info("Выполняем запрос на получения списка студентов.");
         List<Person> personList = new ArrayList<>();
         try(PreparedStatement statement = connection.prepareStatement(SELECT_FROM_PERSON)){
             ResultSet resultSet = statement.executeQuery();
@@ -40,7 +46,10 @@ public class PersonDAOImpl implements PersonDAO {
                 person.setBirthDate(resultSet.getDate("birthdate").getTime());
                 personList.add(person);
             }
+        }catch (SQLException e){
+            LOGGER.error("Ошибка получения списка студентов {}", e);
         }
+        LOGGER.debug("Получено {} студентов", personList.size());
         return personList;
     }
 
@@ -50,14 +59,18 @@ public class PersonDAOImpl implements PersonDAO {
      * @throws SQLException ошибка выполнения запроса
      */
     @Override
-    public void createPerson(Person person) throws SQLException {
+    public void createPerson(Person person) {
         try(PreparedStatement statement = connection.prepareStatement(INSERT_INTO_PERSON_NAME_BIRTHDATE_VALUES_RETURNING_PERSON_ID)){
             statement.setString(1, person.getName());
             statement.setDate(2, new Date(person.getBirthDate()));
             ResultSet res = statement.executeQuery();
             if (res.next()){
                 person.setId(res.getInt("person_id"));
+                LOGGER.info("Добавление нового студента в базу данных {}", person.toString());
+                LOGGER.debug("Сохранен студент: {}", person.toString());
             }
+        } catch (SQLException e){
+            LOGGER.error("Ошибка добавления нового студента {}", e);
         }
     }
 
@@ -67,12 +80,16 @@ public class PersonDAOImpl implements PersonDAO {
      * @throws SQLException ошибка выполнения запроса
      */
     @Override
-    public void updatePerson(Person person) throws SQLException {
+    public void updatePerson(Person person) {
+        LOGGER.info("Обновление данных студента {}", person.getName());
         try(PreparedStatement statement = connection.prepareStatement(UPDATE_PERSON_SET_NAME_BIRTHDATE_WHERE_PERSON_ID)) {
             statement.setString(1, person.getName());
             statement.setDate(2, new Date(person.getBirthDate()));
             statement.setInt(3, person.getId());
             statement.execute();
+            LOGGER.debug("Обновление данных студента {}", person.toString());
+        } catch (SQLException e){
+            LOGGER.error("Ошибка обновления студента {}", e.getMessage());
         }
     }
 
@@ -82,10 +99,14 @@ public class PersonDAOImpl implements PersonDAO {
      * @throws SQLException ошибка выполения запроса
      */
     @Override
-    public void deletePerson(Person person) throws SQLException {
+    public void deletePerson(Person person) {
+        LOGGER.error("Запрос на удаление студента: {}", person.getName());
         try(PreparedStatement statement = connection.prepareStatement(DELETE_FROM_PERSON_WHERE_PERSON_ID)){
             statement.setInt(1, person.getId());
             statement.execute();
+            LOGGER.debug("Удаление студента {}", person.toString());
+        }catch (SQLException e){
+            LOGGER.error("Ошибка удаление студента {}", e);
         }
     }
 }
