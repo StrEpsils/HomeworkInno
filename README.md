@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.com/StrEpsils/HomeworkInno.svg?branch=master)](https://travis-ci.com/StrEpsils/HomeworkInno)
