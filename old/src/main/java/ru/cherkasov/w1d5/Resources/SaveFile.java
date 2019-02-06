@@ -12,7 +12,7 @@ public class SaveFile {
      * @param path путь к файлу
      * @param sentence предложение
      */
-    public SaveFile(String path, String sentence) {
+    SaveFile(String path, String sentence) {
         this.path = path;
         this.sentence = sentence;
     }
@@ -21,7 +21,7 @@ public class SaveFile {
      * Сохранение в файл с дозаписью
      * @throws IOException
      */
-    public void saveFromFile() throws IOException {
+    void saveFromFile() throws IOException {
         try(OutputStream os = new FileOutputStream(path, true)) {
             os.write((sentence + "\n\r").getBytes());
         }

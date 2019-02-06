@@ -6,7 +6,12 @@
 
     <groupId>ru.inno</groupId>
     <artifactId>HomeworkInno</artifactId>
+    <packaging>pom</packaging>
     <version>0.1-SNAPSHOT</version>
+    <modules>
+        <module>old</module>
+        <module>builder</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
